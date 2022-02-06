@@ -12,15 +12,13 @@ function App() {
 
   console.log(items);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>Yardzen Firebase Connection Info</h1>
-        <code>
-          <pre>heyo {items.length}</pre>
-        </code>
-      </header>
-    </div>
+    <ul>
+     {
+       items.map((item, index)=> {
+        return <li key = {index}>{item.type}</li>
+       })
+     }
+    </ul>
   );
 }
 
