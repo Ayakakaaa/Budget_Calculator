@@ -16,14 +16,7 @@ function App() {
   return (
     <>
       <InputAdornments/>
-      <ItemsContainer/>
-      <ul>
-      {
-        items.map((item, index)=> {
-          return <li key = {index}>{item.type}</li>
-        })
-      }
-      </ul>
+      <ItemsContainer items={items}/>
     </>
   );
 }
