@@ -18,6 +18,19 @@ export function ItemsContainer({items}) {
   // turn back to array so we can map
   const types = [...typesSet];
 
+  function removeDuplicatedItems(type) {
+     // filtering for type
+     const itemsArr = items.filter((item) => item.type === type);
+     // moving into an object so I can't have duplicates
+     const itemsHash = {};
+     itemsArr.map((item) => {itemsHash[item.name] = item});
+     // itemsHash.Fountain = {name: fountain, type: water, etc...}
+     // pushing back into array
+     const itemsForType = Object.values(itemsHash);
+
+     return itemsForType;
+  }
+
 
   return (
     <Box sx={{ width: '100%', typography: 'body1' }}>
@@ -35,15 +48,7 @@ export function ItemsContainer({items}) {
         {
             // passing items for each tab
             types.map((type, index) => {
-                // filtering for type
-                const itemsArr = items.filter((item) => item.type === type);
-                // moving into an object so I can't have duplicates
-                const itemsHash = {};
-                itemsArr.map((item) => {itemsHash[item.name] = item});
-                // itemsHash.Fountain = {name: fountain, type: water, etc...}
-                // pushing back into array
-                const itemsForType = Object.values(itemsHash);
-                return <ItemType type={type} key = {index} typeIndex={index} items={itemsForType} />
+                return <ItemType type={type} key = {index} typeIndex={index} items={removeDuplicatedItems(type)} />
             })
         }
       </TabContext>
