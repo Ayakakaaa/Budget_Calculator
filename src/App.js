@@ -3,6 +3,7 @@ import './App.css';
 import React, { useState, useEffect } from 'react';
 import { getItems } from './components/Api.js';
 import { InputAdornments } from "./components/Form.js";
+import { ItemsContainer } from "./components/ItemsContainer";
 
 function App() {
   const [items, setItems] = useState([]);
@@ -15,6 +16,7 @@ function App() {
   return (
     <>
       <InputAdornments/>
+      <ItemsContainer/>
       <ul>
       {
         items.map((item, index)=> {

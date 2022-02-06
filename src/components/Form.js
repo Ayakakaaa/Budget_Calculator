@@ -1,16 +1,9 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import IconButton from '@mui/material/IconButton';
 import Input from '@mui/material/Input';
-import FilledInput from '@mui/material/FilledInput';
-import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';
-import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
-import TextField from '@mui/material/TextField';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 export function InputAdornments() {
     const [values, setValues] = React.useState({
@@ -25,21 +18,21 @@ export function InputAdornments() {
         setValues({ ...values, [prop]: event.target.value });
     };
 
-    const handleClickShowPassword = () => {
-        setValues({
-        ...values,
-        showPassword: !values.showPassword,
-        });
-    };
+    // const handleClickShowPassword = () => {
+    //     setValues({
+    //     ...values,
+    //     showPassword: !values.showPassword,
+    //     });
+    // };
 
-    const handleMouseDownPassword = (event) => {
-        event.preventDefault();
-    };
+    // const handleMouseDownPassword = (event) => {
+    //     event.preventDefault();
+    // };
 
     return (
         <Box>
             <FormControl fullWidth sx={{ m: 1 }} variant="standard">
-            <InputLabel htmlFor="standard-adornment-amount">Amount</InputLabel>
+            <InputLabel htmlFor="standard-adornment-amount">Budget</InputLabel>
             <Input
                 id="standard-adornment-amount"
                 value={values.amount}
