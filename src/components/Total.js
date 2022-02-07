@@ -32,7 +32,7 @@ export function Total ({selectedItems, budget}){
     return (
         <>
         {
-            budget !== 0 ? 
+            Object.values(selectedItems).length > 0 ? 
                 <p>
                     {dollarUS.format(lowerPrice)} - {dollarUS.format(higherPrice)}
                     {
@@ -57,7 +57,7 @@ export function Total ({selectedItems, budget}){
                         null
                     }
                 </p> :
-                <p>Please tell us your budget!</p>
+                <p>Please select your items!</p>
         }
         </>
       );

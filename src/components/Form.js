@@ -40,7 +40,7 @@ export function Form() {
                 <InputLabel htmlFor="standard-adornment-amount">Budget</InputLabel>
                 <Input
                     id="standard-adornment-amount"
-                    value={budget}
+                    value={budget > 0 ? budget : ""}
                     onChange={handleBudget}
                     startAdornment={<InputAdornment position="start">$</InputAdornment>}
                 />
