@@ -5,8 +5,9 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import { ItemType } from './ItemType.js';
 
-export function ItemsContainer({items}) {
+export function ItemsContainer({items, selectedItems, handleSelectedItems}) {
   const [value, setValue] = useState('0');
+
   
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -33,25 +34,28 @@ export function ItemsContainer({items}) {
 
 
   return (
-    <Box sx={{ width: '100%', typography: 'body1' }}>
-      <TabContext value={value}>
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <TabList onChange={handleChange} aria-label="lab API tabs example">
+    <>
+        <Box sx={{ width: '100%', typography: 'body1' }}>
+            <TabContext value={value}>
+            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                <TabList onChange={handleChange} aria-label="lab API tabs example">
+                {
+                    // setting tab titles
+                    types.map((type, index) => {
+                        return <Tab label={type} value={index.toString()} key={index}/>
+                    })
+                }
+                </TabList>
+            </Box>
             {
-                // setting tab titles
+                // passing items for each tab
                 types.map((type, index) => {
-                    return <Tab label={type} value={index.toString()} key={index}/>
+                    return <ItemType type={type} key={index} typeIndex={index} items={removeDuplicatedItems(type)} selectedItems={selectedItems} handleSelectedItems={handleSelectedItems}/>
                 })
             }
-          </TabList>
+            </TabContext>
         </Box>
-        {
-            // passing items for each tab
-            types.map((type, index) => {
-                return <ItemType type={type} key = {index} typeIndex={index} items={removeDuplicatedItems(type)} />
-            })
-        }
-      </TabContext>
-    </Box>
+        {/* <Total budget={budget}/> */}
+    </>
   );
 }

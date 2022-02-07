@@ -4,12 +4,24 @@ import Checkbox from '@mui/material/Checkbox';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
-export function ItemType({type, typeIndex, items}) {
+
+export function ItemType({type, typeIndex, items, handleSelectedItems}) {
     const [selection, setSelection] = useState("");
+    const [totalPrice, setTotalPrice] = useState(0);
+
+    const getItem = (name) => {
+        return items.reduce((prev, curr) => {
+            return (curr.name === name) ? curr : prev;
+        }, {});
+    } 
     const updateSelection = (event) => {
-        console.log(event.target.checked, event.target.value);
-        // console.log(item.name)
-        setSelection(event.target.value);
+        if(event.target.checked) {
+            setSelection(event.target.value);
+            handleSelectedItems(true, typeIndex, getItem(event.target.value));
+        } else {
+            setSelection("");
+            handleSelectedItems(false, typeIndex, {});
+        }
     };
 
   
@@ -23,8 +35,7 @@ export function ItemType({type, typeIndex, items}) {
                             value={typeIndex.toString()}
                         >
                             <FormGroup>
-                                {/* {console.log("TYPE",type,item.type, "INDEX: ", typeIndex, "NAME", item.name, "selection: ", selection)} */}
-                                <FormControlLabel control={<Checkbox value={item.name} id={selection} onChange={updateSelection} checked={item.name === selection}/>} label= {item.name} />
+                                <FormControlLabel control={<Checkbox value={item.name} onChange={updateSelection} checked={item.name === selection}/>} label= {item.name} />
                             </FormGroup>
                         </TabPanel>
                     )

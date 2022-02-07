@@ -1,45 +1,54 @@
-import * as React from 'react';
 import Box from '@mui/material/Box';
 import Input from '@mui/material/Input';
 import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@mui/material/FormControl';
+import React, { useState, useEffect } from 'react';
+import { getItems } from './Api.js';
+import { ItemsContainer } from "./ItemsContainer";
+import { Total } from './Total.js';
 
-export function InputAdornments() {
-    const [values, setValues] = React.useState({
-      amount: '',
-      password: '',
-      weight: '',
-      weightRange: '',
-      showPassword: false,
-    });
+export function Form() {
+    const [items, setItems] = useState([]);
 
-    const handleChange = (prop) => (event) => {
-        setValues({ ...values, [prop]: event.target.value });
+    useEffect(()=> {
+      getItems().then(data => setItems(data));
+    }, []);
+  
+    const [budget, setBudget] = useState(0)
+    const [selectedItems, setSelectedItems] = useState({});
+
+    const handleBudget = (event) => {
+        console.log("budget is ", budget);
+        setBudget(event.target.value);
     };
 
-    // const handleClickShowPassword = () => {
-    //     setValues({
-    //     ...values,
-    //     showPassword: !values.showPassword,
-    //     });
-    // };
-
-    // const handleMouseDownPassword = (event) => {
-    //     event.preventDefault();
-    // };
+    const handleSelectedItems = (toAdd, typeIndex, item) => {
+        const tempSelectedItems = {...selectedItems};
+        if(toAdd) {
+            tempSelectedItems[typeIndex] = item;
+        } else {
+            delete tempSelectedItems[typeIndex];
+        }
+        setSelectedItems(tempSelectedItems);
+    }
 
     return (
-        <Box>
-            <FormControl fullWidth sx={{ m: 1 }} variant="standard">
-            <InputLabel htmlFor="standard-adornment-amount">Budget</InputLabel>
-            <Input
-                id="standard-adornment-amount"
-                value={values.amount}
-                onChange={handleChange('amount')}
-                startAdornment={<InputAdornment position="start">$</InputAdornment>}
-            />
-            </FormControl>
-        </Box>
+        <>
+            <Box>
+                <FormControl fullWidth sx={{ m: 1 }} variant="standard">
+                <InputLabel htmlFor="standard-adornment-amount">Budget</InputLabel>
+                <Input
+                    id="standard-adornment-amount"
+                    value={budget}
+                    onChange={handleBudget}
+                    startAdornment={<InputAdornment position="start">$</InputAdornment>}
+                />
+                </FormControl>
+            </Box>
+            <ItemsContainer items={items} selectedItems={selectedItems} handleSelectedItems={handleSelectedItems}/>
+            <Total selectedItems={selectedItems} budget={budget}/>
+        </>
+
     )
   };
