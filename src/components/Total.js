@@ -34,6 +34,7 @@ export function Total ({selectedItems, budget}){
         {
             Object.values(selectedItems).length > 0 ? 
                 <p>
+                    Total:    
                     {dollarUS.format(lowerPrice)} - {dollarUS.format(higherPrice)}
                     {
                         (lowerPrice > budget) ? 

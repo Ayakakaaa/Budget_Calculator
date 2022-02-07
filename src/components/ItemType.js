@@ -52,6 +52,7 @@ export function ItemType({type, typeIndex, items, expanded, handleAccordian, han
                         return (
                             <FormGroup key={index}>
                                 <FormControlLabel control={<Checkbox value={item.name} onChange={updateSelection} checked={item.name === selection}/>} label= {item.name + " " + dollarUS.format(item.lowPrice/100) + "-" + dollarUS.format(item.highPrice/100)} />
+                                <small>{dollarUS.format(item.lowPrice/100) + "-" + dollarUS.format(item.highPrice/100)}</small>
                             </FormGroup>
                         )
                     })

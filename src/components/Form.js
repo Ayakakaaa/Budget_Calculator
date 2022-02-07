@@ -38,6 +38,7 @@ export function Form() {
             <Box>
                 <FormControl fullWidth sx={{ m: 1 }} variant="standard">
                 <InputLabel htmlFor="standard-adornment-amount">Budget</InputLabel>
+                {budget > 0 ? null : <p>Please input your budget!</p>}
                 <Input
                     id="standard-adornment-amount"
                     value={budget > 0 ? budget : ""}
