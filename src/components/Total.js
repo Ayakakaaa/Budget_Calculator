@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
 
 export function Total ({selectedItems, budget}){
     const calcLowerPrice = () => {
@@ -10,7 +11,6 @@ export function Total ({selectedItems, budget}){
         }
         return total/100;
     }
-    const lowerPrice = calcLowerPrice();
     const calcHigherPrice = () => {
         // saving as array of items
         const selectedItemsArr = Object.values(selectedItems);
@@ -20,17 +20,45 @@ export function Total ({selectedItems, budget}){
         }
         return total/100;
     }
+
+    const lowerPrice = calcLowerPrice();
     const higherPrice = calcHigherPrice();
+
+    let dollarUS = Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+    });
 
     return (
         <>
-          {/* {(lowerPrice > budget) ?  <p>over budget</p> : <p styleName = {{color: "red"}}> {lowerPrice}</p>} */}
-          {(lowerPrice > budget) ?  <p>over budget</p> : null}
-          {(higherPrice < budget) ?  <p>under budget</p> : null}
-          {(lowerPrice <= budget && higherPrice >= budget) ?  <p>in range</p> : null}
-          {console.log("selected items: ", selectedItems, calcLowerPrice())}
-          <p>{calcLowerPrice()}</p> 
-          <p>{calcHigherPrice()}</p> 
+        {
+            budget !== 0 ? 
+                <p>
+                    {dollarUS.format(lowerPrice)} - {dollarUS.format(higherPrice)}
+                    {
+                        (lowerPrice > budget) ? 
+                        <Stack sx={{ width: '100%' }} spacing={2}>
+                            <Alert severity="warning">Over Price</Alert>
+                        </Stack>: 
+                         null
+                    }
+                    {
+                        (higherPrice < budget) ? 
+                        <Stack sx={{ width: '100%' }} spacing={2}>
+                            <Alert severity="info">Under Price</Alert>
+                        </Stack> : 
+                        null
+                    }
+                    {
+                        (lowerPrice <= budget && higherPrice >= budget) ?
+                        <Stack sx={{ width: '100%' }} spacing={2}>
+                            <Alert severity="success">In range!</Alert>
+                        </Stack>:
+                        null
+                    }
+                </p> :
+                <p>Please tell us your budget!</p>
+        }
         </>
       );
     
