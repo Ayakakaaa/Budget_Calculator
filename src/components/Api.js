@@ -17,7 +17,6 @@ export async function getItems() {
         const itemsCol = collection(db, 'items');
         const itemSnapshot = await getDocs(itemsCol);
         const items = itemSnapshot.docs.map(doc => doc.data());
-        console.log(items);
         return items;
 };
 

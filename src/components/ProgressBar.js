@@ -4,7 +4,6 @@ import LinearProgress from '@mui/material/LinearProgress';
 
 export default function ProgressBar({budget, lowerTotal, higherTotal}) {
     const [progress, setProgress] = useState((parseFloat(budget) < lowerTotal) ? 100 : 100-(100 * (parseFloat(budget) - lowerTotal) / (higherTotal - lowerTotal)));
-    // console.log(parseFloat(budget), lowerTotal, higherTotal)
 
     useEffect(() => {
         if (parseFloat(budget) < lowerTotal) {

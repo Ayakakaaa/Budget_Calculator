@@ -19,7 +19,6 @@ export function Form() {
     const [selectedItems, setSelectedItems] = useState({});
 
     const handleBudget = (event) => {
-        console.log("budget is ", budget);
         setBudget(event.target.value);
     };
 
