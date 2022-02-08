@@ -46,7 +46,11 @@ export function Form() {
                 />
                 </FormControl>
             </Box>
-            <ItemsContainer items={items} selectedItems={selectedItems} handleSelectedItems={handleSelectedItems}/>
+            <ItemsContainer 
+                items={items} 
+                selectedItems={selectedItems} 
+                handleSelectedItems={handleSelectedItems}
+            />
             <Total selectedItems={selectedItems} budget={budget}/>
         </>
 

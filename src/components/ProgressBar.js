@@ -1,17 +1,28 @@
-import { useState, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import Box from '@mui/material/Box';
 import LinearProgress from '@mui/material/LinearProgress';
 
 export default function ProgressBar({budget, lowerTotal, higherTotal}) {
-    const [progress, setProgress] = useState((parseFloat(budget) < lowerTotal) ? 100 : 100-(100 * (parseFloat(budget) - lowerTotal) / (higherTotal - lowerTotal)));
-
-    useEffect(() => {
-        if (parseFloat(budget) < lowerTotal) {
-            setProgress(100);
+    // useCallback fixes useEffect dependency error
+    const calcProgress = useCallback(() => {
+        const roomInBudget = higherTotal - budget.toString();
+        const budgetRange = higherTotal - lowerTotal;
+        const result = 100 * roomInBudget / budgetRange;
+        if (result < 0) {
+            return 0;
+        } else if (result > 100) {
+            return 100;
         } else {
-            setProgress(100 - (100 * (parseFloat(budget) - lowerTotal) / (higherTotal - lowerTotal)));
+            return result;
         }
-    }, [budget, lowerTotal, higherTotal]);
+    }, [budget, higherTotal, lowerTotal])
+
+    // const [progress, setProgress] = useState(calcProgress());
+    const [progress] = useState(calcProgress());
+
+    // useEffect(() => {
+    //     setProgress(calcProgress());
+    // }, [calcProgress]);
 
 
     return (
