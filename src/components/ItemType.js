@@ -33,6 +33,11 @@ export function ItemType({type, typeIndex, items, expanded, handleAccordian, han
         currency: "USD",
     });
 
+    const itemStyles = {
+        display: "flex", 
+        flexDirection: "row"
+    };
+
   
     return (
         <Accordion expanded={expanded === typeIndex.toString()} onChange={handleAccordian(typeIndex.toString())}>
@@ -50,7 +55,7 @@ export function ItemType({type, typeIndex, items, expanded, handleAccordian, han
                 {
                     items.map((item,index) => {
                         return (
-                            <FormGroup style={{display: "flex" , flexDirection: "row"}} key={index}>
+                            <FormGroup style={itemStyles} key={index}>
                                 <FormControlLabel control={<Checkbox value={item.name} onChange={updateSelection} checked={item.name === selection}/>} label= {item.name} />
                                 <small style={{alignSelf:"center"}}>{dollarUS.format(item.lowPrice/100) + "-" + dollarUS.format(item.highPrice/100)}</small>
                             </FormGroup>

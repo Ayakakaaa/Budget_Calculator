@@ -34,7 +34,7 @@ export function Total ({selectedItems, budget}){
         <>
         {
             Object.values(selectedItems).length > 0 ? 
-                <p>
+                <div style={{marginTop: "20px"}}>
                     Total:    
                     {dollarUS.format(lowerPrice)} - {dollarUS.format(higherPrice)}
                     <ProgressBar budget={budget} lowerTotal={lowerPrice} higherTotal={higherPrice} />
@@ -59,7 +59,7 @@ export function Total ({selectedItems, budget}){
                         </Stack>:
                         null
                     }
-                </p> :
+                </div> :
                 <p>Please select your items!</p>
         }
         </>
