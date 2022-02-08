@@ -4,6 +4,10 @@
   color: rgba(0, 0, 0, 0.87);
 }
 
+small {
+  color: rgba(90, 90, 90, 1);
+}
+
 /* .App-logo {
   height: 40vmin;
   pointer-events: none;

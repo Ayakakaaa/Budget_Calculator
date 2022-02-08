@@ -50,9 +50,9 @@ export function ItemType({type, typeIndex, items, expanded, handleAccordian, han
                 {
                     items.map((item,index) => {
                         return (
-                            <FormGroup key={index}>
-                                <FormControlLabel control={<Checkbox value={item.name} onChange={updateSelection} checked={item.name === selection}/>} label= {item.name + " " + dollarUS.format(item.lowPrice/100) + "-" + dollarUS.format(item.highPrice/100)} />
-                                <small>{dollarUS.format(item.lowPrice/100) + "-" + dollarUS.format(item.highPrice/100)}</small>
+                            <FormGroup style={{display: "flex" , flexDirection: "row"}} key={index}>
+                                <FormControlLabel control={<Checkbox value={item.name} onChange={updateSelection} checked={item.name === selection}/>} label= {item.name} />
+                                <small style={{alignSelf:"center"}}>{dollarUS.format(item.lowPrice/100) + "-" + dollarUS.format(item.highPrice/100)}</small>
                             </FormGroup>
                         )
                     })
