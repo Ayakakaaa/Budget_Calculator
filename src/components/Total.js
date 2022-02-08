@@ -1,5 +1,6 @@
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
+import ProgressBar from './ProgressBar.js';
 
 export function Total ({selectedItems, budget}){
     const calcLowerPrice = () => {
@@ -36,6 +37,7 @@ export function Total ({selectedItems, budget}){
                 <p>
                     Total:    
                     {dollarUS.format(lowerPrice)} - {dollarUS.format(higherPrice)}
+                    <ProgressBar budget={budget} lowerTotal={lowerPrice} higherTotal={higherPrice} />
                     {
                         (lowerPrice > budget) ? 
                         <Stack sx={{ width: '100%' }} spacing={2}>

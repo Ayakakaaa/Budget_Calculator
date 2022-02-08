@@ -1,11 +1,14 @@
 import './App.css';
-import  BudgetContainer from "./components/BudgetContainer.js";
-
+import BudgetContainer from "./components/BudgetContainer.js";
+import Header from './components/Header.js';
 
 function App() {
 
   return (
-    <BudgetContainer/>
+    <>
+      <Header/>
+      <BudgetContainer/>
+    </>
   );
 }
 
